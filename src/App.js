@@ -4,10 +4,7 @@ import TodoForm from "./component/TodoForm";
 import TotoItem from "./component/TodoItem";
 import SearchForm from "./component/Search";
 
-const intData = [
-  { id: uuidv4(), title: "Playss", completed: false },
-  { id: uuidv4(), title: "Playsdas", completed: true }
-];
+const intData = [];
 
 function App() {
   const [tasks, setTasks] = useState(intData);
@@ -33,16 +30,23 @@ function App() {
     newTaskfromUpdate[idx] = { ...newTaskfromUpdate[idx], ...updateValue };
     setTasks(newTaskfromUpdate);
   };
+
+  const [search, setSearch] = useState("");
+
+  const filterTodos = tasks.filter((el) =>
+    el.title.toLowerCase().includes(search)
+  );
+
   return (
     <div className="container pt-5" style={{ maxWidth: 576 }}>
       <TodoForm addTask={createTask} />
       <br />
 
-      <SearchForm />
+      <SearchForm setSearchP={setSearch} text={search} />
 
       <br />
       <ul className="list-group">
-        {tasks.map((el) => (
+        {filterTodos.map((el) => (
           <TotoItem
             key={el.id}
             todo={el}
