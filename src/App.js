@@ -18,6 +18,19 @@ function App() {
 
   const deleTask = (idTask) => {
     console.log(idTask);
+    const idx = tasks.findIndex((el) => el.id === idTask);
+    const newTaskfromdele = [...tasks];
+    newTaskfromdele.splice(idx, 1);
+    setTasks(newTaskfromdele);
+  };
+
+  const updateTask = (idTask, updateValue) => {
+    console.log(idTask);
+    console.log(updateValue);
+    const idx = tasks.findIndex((el) => el.id === idTask);
+    const newTaskfromUpdate = [...tasks];
+    newTaskfromUpdate[idx] = { ...newTaskfromUpdate[idx], ...updateValue };
+    setTasks(newTaskfromUpdate);
   };
   return (
     <div className="container pt-5" style={{ maxWidth: 576 }}>
@@ -26,7 +39,12 @@ function App() {
       <br />
       <ul className="list-group">
         {tasks.map((el) => (
-          <TotoItem key={el.id} todo={el} deleTaskP={deleTask} />
+          <TotoItem
+            key={el.id}
+            todo={el}
+            deleTaskP={deleTask}
+            updateTask={updateTask}
+          />
         ))}
       </ul>
     </div>
@@ -34,33 +52,3 @@ function App() {
 }
 
 export default App;
-
-{
-  /* <li className="list-group-item p-3">
-          <form>
-            <div className="input-group">
-              <input type="text" className="form-control" value="Play game" />
-              <button className="btn btn-primary">
-                <i className="fa-solid fa-check" />
-              </button>
-              <button className="btn btn-secondary">
-                <i className="fa-solid fa-xmark" />
-              </button>
-            </div>
-          </form>
-        </li>
-        <li className="list-group-item p-3 text-bg-success">
-          <div className="d-flex align-items-center">
-            <span className="flex-fill">Meet the dentist</span>
-            <div className="btn-group">
-              <button className="btn btn-outline-light">
-                <i className="fa-solid fa-repeat" />
-              </button>
-              <button className="btn btn-outline-light">
-                <i className="fa-regular fa-trash-can" />
-              </button>
-            </div>
-          </div>
-        </li>
-      </ul> */
-}

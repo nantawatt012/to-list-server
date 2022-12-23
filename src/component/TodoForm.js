@@ -2,7 +2,7 @@ import { useState } from "react";
 import validator from "validator";
 
 function TodoForm(props) {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(props.todo?.title || "");
   const [error, setError] = useState("");
 
   const handdleSubmit = (event) => {
@@ -10,9 +10,11 @@ function TodoForm(props) {
     if (validator.isEmpty(input, { ignore_whitespace: true })) {
       setError("Title is required");
     } else {
-      props.addTask(input);
-      setError("");
       setInput("");
+      setError("");
+      props.addTask?.(input);
+      props.updateTask?.(props.todo.id, { title: input });
+      props.closeEdit?.();
     }
   };
 
@@ -32,7 +34,11 @@ function TodoForm(props) {
         <button
           type="button"
           className="btn btn-secondary"
-          onClick={() => setInput("")}
+          onClick={() => {
+            setInput("");
+            // !props.closeEdit || props.closeEdit();
+            props.closeEdit?.();
+          }}
         >
           <i className="fa-solid fa-xmark" />
         </button>
