@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import TodoForm from "./component/TodoForm";
 import TotoItem from "./component/TodoItem";
+import SearchForm from "./component/Search";
 
 const intData = [
   { id: uuidv4(), title: "Playss", completed: false },
@@ -35,6 +36,9 @@ function App() {
   return (
     <div className="container pt-5" style={{ maxWidth: 576 }}>
       <TodoForm addTask={createTask} />
+      <br />
+
+      <SearchForm />
 
       <br />
       <ul className="list-group">
