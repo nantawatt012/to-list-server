@@ -9,7 +9,8 @@ export default function Task(props) {
           className="btn btn-outline-light"
           onClick={() =>
             props.updateTask(props.todo.id, {
-              completed: !props.todo.completed
+              completed: !props.todo.completed,
+              title: props.todo.title
             })
           }
         >
